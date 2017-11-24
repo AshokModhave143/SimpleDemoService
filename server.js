@@ -2,18 +2,18 @@
 // Dependencies
 var express = require('express');
 var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var morgan = require('morgan');
-var restful = require('node-restful');
-var mongoose = restful.mongoose;
+//var methodOverride = require('method-override');
+//var morgan = require('morgan');
+//var restful = require('node-restful');
+//var mongoose = restful.mongoose;
 
 // Express
 var app = express();
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
-app.use(methodOverride());
+//app.use(methodOverride());
 
 //mongoose.connect("mongodb://localhost/api");
 
