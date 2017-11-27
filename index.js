@@ -39,7 +39,7 @@ app.get('/api/checkVacancy',function(req, res){
     });
 });
 app.post('/api/saveVacancy',function(req, res){
-    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "There are no parameters";
+    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.vacancy ? req.body.result.parameters.vacancy : "There are no parameters";
     
     return res.json({
         speech: speech,
