@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 //var mongoose = restful.mongoose;
 
 // Express
-var app = express();
+const app = express();
 //app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -26,9 +26,23 @@ app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 
 // Resource.register(app, '/api');
 
-app.get('/api/vacancies',function(req, res){
-    var str = "very good afternoon sir, how may i help you ?"
-    res.send(str);
+app.get('/api/checkVacancy',function(req, res){
+    var str = "This is test GET sample"; 
+    
+    return res.json({
+        speech: str,
+        displayText: str,
+        source: 'simpledemoservice'
+    });
+});
+app.post('/api/saveVacancy',function(req, res){
+    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.echoText ? req.body.result.parameters.echoText : "There are no parameters";
+    
+    return res.json({
+        speech: speech,
+        displayText: speech,
+        source: 'simpledemoservice'
+    });
 });
 
 // Start server
