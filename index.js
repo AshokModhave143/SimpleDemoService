@@ -9,10 +9,13 @@ var bodyParser = require('body-parser');
 
 // Express
 const app = express();
+var PORT = process.env.PORT || 3000;
 //app.use(morgan('dev'));
+app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
+
 //app.use(methodOverride());
 
 //mongoose.connect("mongodb://localhost/api");
@@ -46,5 +49,6 @@ app.post('/api/saveVacancy',function(req, res){
 });
 
 // Start server
-app.listen(3000);
-console.log('API is running on port 3000...');
+app.listen(PORT, function() {
+    console.log('API is running on port ' + PORT);
+});
