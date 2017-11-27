@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 //var restful = require('node-restful');
 //var mongoose = restful.mongoose;
 
+//Data respository
+var data = require('./dataInput/datafile');
+
 // Express
 const app = express();
 var PORT = process.env.PORT || 3000;
@@ -39,7 +42,7 @@ app.get('/api/checkVacancy',function(req, res){
     });
 });
 app.post('/api/saveVacancy',function(req, res){
-    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.vacancy ? req.body.result.parameters.vacancy : "There are no parameters";
+    var speech = req.body.result && req.body.result.parameters && req.body.result.parameters.department ? req.body.result.parameters.department : "There are no parameters";
     
     return res.json({
         speech: speech,
