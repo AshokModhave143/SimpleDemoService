@@ -45,7 +45,7 @@ app.post('/api/checkVacancy',function(req, res){
     var result = '';
     for(var i in data.vacancylist) {
         if(data.vacancylist[i].department == dept && data.vacancylist[i].position == pos) {
-            result = 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available for ' + data.vacancylist[i].positions + ' role in ' + data.vacancylist[i].department + '.';
+            result = 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available for ' + data.vacancylist[i].position + ' role in ' + data.vacancylist[i].department + '.';
         }
     }
     if(result.length == 0) {
