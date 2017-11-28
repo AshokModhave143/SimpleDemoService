@@ -1,0 +1,24 @@
+{
+    "vacancylist" : [
+        {"jid": 1,"department": "HR", "vacantPositions": 10, "position": "Sales Manager"},
+        {"jid": 2,"department": "HR", "vacantPositions": 11, "position": "Marketing Manager"},
+        {"jid": 3,"department": "HR", "vacantPositions": 13, "position": "Sales Manager"},
+        {"jid": 4,"department": "HR", "vacantPositions": 13, "position": "Senior HR"},
+        {"jid": 5,"department": "HR", "vacantPositions": 13, "position": "HR Recruiter"},
+        {"jid": 6,"department": "Finance", "vacantPositions": 15, "position": "CA Specialist"},
+        {"jid": 7,"department": "Finance", "vacantPositions": 15, "position": "Accountant"},
+        {"jid": 8,"department": "Finance", "vacantPositions": 15, "position": "Finance Manager"},
+        {"jid": 9,"department": "Finance", "vacantPositions": 15, "position": "Business Analyst"},
+        {"jid": 10,"department": "Finance", "vacantPositions": 15, "position": "Associate CA"},
+        {"jid": 11,"department": "Operations", "vacantPositions": 12, "position": "Support Engineer"},
+        {"jid": 12,"department": "Operations", "vacantPositions": 12, "position": "Operation Engineer"},
+        {"jid": 13,"department": "Operations", "vacantPositions": 12, "position": "L1 Support"},
+        {"jid": 14,"department": "Operations", "vacantPositions": 12, "position": "L2 Support"},
+        {"jid": 15,"department": "Operations", "vacantPositions": 12, "position": "L3 Support"},
+        {"jid": 16,"department": "Admin", "vacantPositions": 14, "position": "Network Engineer"},
+        {"jid": 17,"department": "Admin", "vacantPositions": 14, "position": "Network Admin"},
+        {"jid": 18,"department": "Admin", "vacantPositions": 14, "position": "System Admin"},
+        {"jid": 19,"department": "Admin", "vacantPositions": 14, "position": "Database Admin"},
+        {"jid": 20,"department": "Admin", "vacantPositions": 14, "position": "System Specialist"}
+    ]
+}

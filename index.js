@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 //var mongoose = restful.mongoose;
 
 //Data respository
-var data = require('./dataInput/datafile');
+var data = require('./dataInput/datafile.json');
 
 // Express
 const app = express();
@@ -31,13 +31,31 @@ app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 // })).methods(['get','put','post']);
 
 // Resource.register(app, '/api');
-
-app.get('/api/checkVacancy',function(req, res){
-    var str = "This is test GET sample"; 
-    
+app.get('/api', function(req, res){
+    var result = 'This is get request';
     return res.json({
-        speech: str,
-        displayText: str,
+        speech: result,
+        displayText: result,
+        source: 'simpledemoservice'
+    });
+});
+app.post('/api/checkVacancy',function(req, res){
+    var dept = req.body.result && req.body.result.parameters && req.body.result.parameters.department ? req.body.result.parameters.department : "Deparment parameter missing";
+    var pos = req.body.result && req.body.result.parameters && req.body.result.parameters.position ? req.body.result.parameters.position : "Position parameter missing";
+    var result = '';
+    for(var i in data.vacancylist) {
+        if(data.vacancylist[i].department == dept && data.vacancylist[i].position == pos) {
+            result = 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available for ' + data.vacancylist[i].position + ' role in ' + data.vacancylist[i].department + '.';
+        }
+    }
+    if(result.length == 0) {
+        result = 'Sorry. There are no vacancy available for ' + pos + ' in ' + dept;
+    }
+    
+    //console.log(req);    
+    return res.json({
+        speech: result,
+        displayText: result,
         source: 'simpledemoservice'
     });
 });
