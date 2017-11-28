@@ -41,11 +41,11 @@ app.get('/api', function(req, res){
 });
 app.post('/api/checkVacancy',function(req, res){
     var dept = req.body.result && req.body.result.parameters && req.body.result.parameters.department ? req.body.result.parameters.department : "Deparment parameter missing";
-    var pos = req.body.result && req.body.result.parameters && req.body.result.parameters.position ? req.body.result.parameters.position : "Position parameter missing";
+    var pos = req.body.result && req.body.result.parameters && req.body.result.parameters.positions ? req.body.result.parameters.positions : "Position parameter missing";
     var result = '';
     for(var i in data.vacancylist) {
         if(data.vacancylist[i].department == dept && data.vacancylist[i].position == pos) {
-            result = 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available for ' + data.vacancylist[i].position + ' role in ' + data.vacancylist[i].department + '.';
+            result = 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available for ' + data.vacancylist[i].positions + ' role in ' + data.vacancylist[i].department + '.';
         }
     }
     if(result.length == 0) {
