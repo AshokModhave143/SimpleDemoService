@@ -5,6 +5,7 @@
         {"jid": 3,"department": "HR", "vacantPositions": 13, "position": "Sales Manager"},
         {"jid": 4,"department": "HR", "vacantPositions": 13, "position": "Senior HR"},
         {"jid": 5,"department": "HR", "vacantPositions": 13, "position": "HR Recruiter"},
+        {"jid": 3,"department": "Finance", "vacantPositions": 13, "position": "Sales Manager"},
         {"jid": 6,"department": "Finance", "vacantPositions": 15, "position": "CA Specialist"},
         {"jid": 7,"department": "Finance", "vacantPositions": 15, "position": "Accountant"},
         {"jid": 8,"department": "Finance", "vacantPositions": 15, "position": "Finance Manager"},
