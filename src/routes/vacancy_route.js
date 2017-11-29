@@ -23,6 +23,8 @@ router.post('/', function(req, res){
     switch(action) {
         case 'list_all_vacancy': vacancy_controller.vacancy_list_post(req, res);
         break;
+        case 'search_vacancy' : vacancy_controller.vacancy_list_post(req, res);
+        break;
         case 'default':
             error_controller.handle_error(req, res);
         break;
