@@ -1,34 +1,37 @@
 //Dependencies
-var Vacancy = require('./../model/vacancy');
+let VacancyModel = require('./../model/vacancy');
 
 //Default controller
-exports.vacancy_default_get = function(req, res) {
-    Vacancy.defaultGetApi().then((output)=> {
+exports.vacancy_default_get = function(req, res) {    
+    VacancyModel.defaultGetApi().then((output)=> {
         //res.send(JSON.stringify(output));
         return res.json(output);
     }).catch((error)=> {
         //res.send(JSON.stringify(error));
-        return res.json(output);
+        return res.json(error);
     });
 };
 
 //Test GET
 exports.vacancy_test_get = function(req, res) {
     //res.send('This is test function');
-    Vacancy.testGetApi().then((output)=>{
+    VacancyModel.testGetApi().then((output)=>{
         return res.json(output);
     }).catch((error)=>{
-        return res.json(output);
+        return res.json(error);
     });
 };
 
 //Display list of vacancies available
 exports.vacancy_list_post = function(req, res) {
     //res.send('Vacancy List function');
-    Vacancy.listAllPostAPi().then((output)=> {
+    var dept = req.body.result && req.body.result.parameters && req.body.result.parameters.department ? req.body.result.parameters.department : '';
+    var pos = req.body.result && req.body.result.parameters && req.body.result.parameters.positions ? req.body.result.parameters.positions : '';
+    
+    VacancyModel.listAllPostAPi(dept, pos).then((output)=> {
         return res.json(output);
     }).catch((error)=> {
-        return res.json(output);
+        return res.json(error);
     });
 };
 

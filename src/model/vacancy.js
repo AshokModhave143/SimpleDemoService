@@ -1,22 +1,15 @@
 // Dependencies
+let responseStruct = require('./response');
 
 //Data respository
-var data = require('./../../dataInput/datafile.json');
+let data = require('./../../dataInput/datafile.json');
 
-//Create Response Structure
-let create_response = function(text) {
-    return {
-        speech: text,
-        displayText: text,
-        source: 'simpledemoservice'
-    };
-};
 /* Function modules */
 //Default GET
 exports.defaultGetApi = function() {
     return new Promise((resolve, reject)=>{
         let output = 'Hello. Greetings. welcome to my page.';
-        resolve(create_response(output));        
+        resolve(responseStruct.create_response(output));        
         //reject(create_response('Exception Thrown.'));
     });
 };
@@ -24,23 +17,53 @@ exports.defaultGetApi = function() {
 exports.testGetApi = function() {
     return new Promise((resolve, reject)=> {
         let output = "Great. Test GET is successful. Cheers!!!. You doing great.";
-        resolve(create_response(output));
+        resolve(responseStruct.create_response(output));
         //reject(create_response(output));
     });
 };
 //List all vacancies API
-exports.listAllPostAPi = function() {
+exports.listAllPostAPi = function(dept, pos) {
     return new Promise((resolve, reject)=> {
-        let output = 'We got you all vacancies available with us.';
+        let output = 'We got you all vacancies available with us. ';
+        let flag = true;
         for(let i in data.vacancylist) {
-            output = output + 'There are' + data.vacancylist[i].vacantPositions + ' vacancies available in ' + data.vacancylist[i].department + ' for ' + data.vacancylist[i].position + ' role. ';
+            if(dept && pos) {
+                if(data.vacancylist[i].department == dept && data.vacancylist[i].position == pos) {
+                    output = output + 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available in ' + data.vacancylist[i].department + ' for ' + data.vacancylist[i].position + ' role. ';
+                    flag = false;
+                }
+            }
+            else if(dept) {
+                if(data.vacancylist[i].department == dept) {
+                    output = output + 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available in ' + data.vacancylist[i].department + ' for ' + data.vacancylist[i].position + ' role. ';
+                    flag = false;
+                }
+            }
+            else if(pos) {
+                if(data.vacancylist[i].position == pos) {
+                    output = output + 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available in ' + data.vacancylist[i].department + ' for ' + data.vacancylist[i].position + ' role. ';
+                    flag = false;
+                }
+            }
+            else {
+                output = output + 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available in ' + data.vacancylist[i].department + ' for ' + data.vacancylist[i].position + ' role. ';
+                flag = false;
+            }
         }
         output += 'Thank you!!!';
-        if(data.vacancylist.length == 0) {
-            output = "There are no vacancies available in any department";
-            reject(create_response(output));
+        if(flag) {
+            if(dept && pos) {
+                output = 'Sorry. There are no vacancies available in '+ dept +' department for ' + pos + ' role. ';
+            }
+            else if(pos) {
+                output = 'Sorry. There are no vacancies available for ' + pos + ' role in any department. ';
+            }
+            else if(dept) {
+                output = 'Sorry. There are no vacancies available in '+ dept +' department for any role. ';
+            }
+            reject(responseStruct.create_response(output));
         }else {
-            resolve(create_response(output));
+            resolve(responseStruct.create_response(output));
         }
     });
 }
