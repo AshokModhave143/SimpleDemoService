@@ -16,7 +16,8 @@ exports.defaultGetApi = function() {
 //Default test GET
 exports.testGetApi = function() {
     return new Promise((resolve, reject)=> {
-        let output = "Great. Test GET is successful. Cheers!!!. You doing great.";
+        //let output = "Great. Test GET is successful. Cheers!!!. You doing great. ";
+        let output = "<p>Great. Test GET is successful. Cheers!!!. You doing great.</p><input type='text' placeholder='enter value'>";
         resolve(responseStruct.create_response(output));
         //reject(create_response(output));
     });
@@ -66,7 +67,7 @@ exports.listAllAPi = function(dept, pos) {
             resolve(responseStruct.create_response(output));
         }
     });
-}
+};
 //List all vacancies API
 exports.searchAPi = function(dept, pos) {
     return new Promise((resolve, reject)=> {
@@ -80,7 +81,7 @@ exports.searchAPi = function(dept, pos) {
         for(let i in data.vacancylist) {
             if(dept && pos) {
                 if(data.vacancylist[i].department == dept && data.vacancylist[i].position == pos) {
-                    output = output + 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available in ' + data.vacancylist[i].department + ' for ' + data.vacancylist[i].position + ' role. ';
+                    output = output + 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available in ' + data.vacancylist[i].department + ' for ' + data.vacancylist[i].position + ' role with job id '+ data.vacancylist[i].jid +'. ';
                     flag = false;
                 }
             }
@@ -106,6 +107,45 @@ exports.searchAPi = function(dept, pos) {
             resolve(responseStruct.create_response(output));
         }
     });
-}
+};
 
+//Create/Add new vacancy API
+exports.createApi = function(jobid, dept, vacantPos, pos) {
+    return new Promise((resolve, reject)=> {
+        let output = '';
+        let isalreadyPresent = false;
+        
+        //validation
+        if(!jobid) {
+            reject(responseStruct.create_response('Oops. you have missed Job id parameter. Can not create vacancy. Please try again. '));
+        }
+        if(!dept) {
+            reject(responseStruct.create_response('Oops. you have missed department parameter. Can not create vacancy. Please try again. '));
+        }
+        if(!vacantPos) {
+            reject(responseStruct.create_response('Oops. you have not mentioned how many vacancies you want to create. Can not create vacancy. Please try again. '));
+        }        
+        if(!pos) {
+            reject(responseStruct.create_response('Oops. you have missed position/role parameter. Can not create vacancy. Please try again. '));
+        }
 
+        console.log(jobid + ': ' + dept + ' : ' + vacantPos + ' : '+ pos);
+
+        //Search if already present else add new record
+        for(var i in data.vacancylist) {
+            console.log(data.vacancylist[i].jid);
+            if(data.vacancylist[i].jid == jobid && data.vacancylist[i].department == dept 
+                && data.vacancylist[i].position == pos ) {
+                data.vacancylist[i].vacantPositions += vacantPos;
+                console.log('found record');
+                isalreadyPresent = true;
+                output = 'It seems vacancy record already present. New vacancy positons has been added to existing record. ';
+            }
+        }
+        if(!isalreadyPresent) {
+            data.vacancylist.push({"jid": jobid,"department": dept, "vacantPositions": vacantPos, "position": pos});            
+            output = 'New vacancy positons has been created. ';
+        }
+        resolve(responseStruct.create_response(output));
+    });
+};
