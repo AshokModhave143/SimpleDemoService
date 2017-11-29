@@ -22,7 +22,7 @@ exports.testGetApi = function() {
     });
 };
 //List all vacancies API
-exports.listAllPostAPi = function(dept, pos) {
+exports.listAllAPi = function(dept, pos) {
     return new Promise((resolve, reject)=> {
         let output = 'We got you all vacancies available with us. ';
         let flag = true;
@@ -60,6 +60,46 @@ exports.listAllPostAPi = function(dept, pos) {
             }
             else if(dept) {
                 output = 'Sorry. There are no vacancies available in '+ dept +' department for any role. ';
+            }
+            reject(responseStruct.create_response(output));
+        }else {
+            resolve(responseStruct.create_response(output));
+        }
+    });
+}
+//List all vacancies API
+exports.searchAPi = function(dept, pos) {
+    return new Promise((resolve, reject)=> {
+        let output = '';
+        let flag = true;
+
+        if(!dept || !pos) {
+            output = 'Did you missed something. I didnt got the department or position you looking for vacancy. Can you try again.';
+            reject(responseStruct.create_response(output));
+        }
+        for(let i in data.vacancylist) {
+            if(dept && pos) {
+                if(data.vacancylist[i].department == dept && data.vacancylist[i].position == pos) {
+                    output = output + 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available in ' + data.vacancylist[i].department + ' for ' + data.vacancylist[i].position + ' role. ';
+                    flag = false;
+                }
+            }
+            // else if(dept) {
+            //     if(data.vacancylist[i].department == dept) {
+            //         output = output + 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available in ' + data.vacancylist[i].department + ' for ' + data.vacancylist[i].position + ' role. ';
+            //         flag = false;
+            //     }
+            // }
+            // else if(pos) {
+            //     if(data.vacancylist[i].position == pos) {
+            //         output = output + 'There are ' + data.vacancylist[i].vacantPositions + ' vacancies available in ' + data.vacancylist[i].department + ' for ' + data.vacancylist[i].position + ' role. ';
+            //         flag = false;
+            //     }
+            // }
+        }
+        if(flag) {
+            if(dept && pos) {
+                output = 'Sorry. There are no vacancies available in '+ dept +' department for ' + pos + ' role. ';
             }
             reject(responseStruct.create_response(output));
         }else {

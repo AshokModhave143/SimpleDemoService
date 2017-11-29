@@ -23,12 +23,25 @@ exports.vacancy_test_get = function(req, res) {
 };
 
 //Display list of vacancies available
-exports.vacancy_list_post = function(req, res) {
+exports.vacancy_listAll = function(req, res) {
     //res.send('Vacancy List function');
     var dept = req.body.result && req.body.result.parameters && req.body.result.parameters.department ? req.body.result.parameters.department : '';
     var pos = req.body.result && req.body.result.parameters && req.body.result.parameters.positions ? req.body.result.parameters.positions : '';
     
-    VacancyModel.listAllPostAPi(dept, pos).then((output)=> {
+    VacancyModel.listAllAPi(dept, pos).then((output)=> {
+        return res.json(output);
+    }).catch((error)=> {
+        return res.json(error);
+    });
+};
+
+//Vacancy Search
+exports.vacancy_search = function(req, res) {
+    //res.send('Vacancy Search function');
+    var dept = req.body.result && req.body.result.parameters && req.body.result.parameters.department ? req.body.result.parameters.department : '';
+    var pos = req.body.result && req.body.result.parameters && req.body.result.parameters.positions ? req.body.result.parameters.positions : '';
+    
+    VacancyModel.searchAPi(dept, pos).then((output)=> {
         return res.json(output);
     }).catch((error)=> {
         return res.json(error);
@@ -38,11 +51,6 @@ exports.vacancy_list_post = function(req, res) {
 //Vacancy details
 exports.vacancy_detail_post = function(req, res) {
     res.send('Vacancy Detail function');
-};
-
-//Vacancy Search
-exports.vacancy_search_post = function(req, res) {
-    res.send('Vacancy Search function');
 };
 
 //Create vacancy

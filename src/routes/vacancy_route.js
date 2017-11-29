@@ -18,12 +18,10 @@ router.post('/', function(req, res){
     let action = req.body.result && req.body.result.action ? req.body.result.action : 'default';
 
     //console.log('Action = ' + action);
-    //let url = '/' + action;
-    //res.redirect('/vacancy/'+action);
     switch(action) {
-        case 'list_all_vacancy': vacancy_controller.vacancy_list_post(req, res);
+        case 'list_all_vacancy': vacancy_controller.vacancy_listAll(req, res);
         break;
-        case 'search_vacancy' : vacancy_controller.vacancy_list_post(req, res);
+        case 'search_vacancy' : vacancy_controller.vacancy_search(req, res);
         break;
         case 'default':
             error_controller.handle_error(req, res);
@@ -32,7 +30,10 @@ router.post('/', function(req, res){
 });
 
 /* POST request for List all vacancy */
-router.post('/list_all_vacancy', vacancy_controller.vacancy_list_post);
+router.post('/list_all_vacancy', vacancy_controller.vacancy_listAll);
+
+/* POST request for Deleting exhisting vacancy */
+router.post('/search_vacancy', vacancy_controller.vacancy_search);
 
 /* POST request for creating new vacancy */
 router.post('/create_vacancy', vacancy_controller.vacancy_create_post);
@@ -42,9 +43,6 @@ router.post('/update_vacancy', vacancy_controller.vacancy_create_post);
 
 /* POST request for Deleting exhisting vacancy */
 router.post('/delete_vacancy', vacancy_controller.vacancy_create_post);
-
-/* POST request for Deleting exhisting vacancy */
-router.post('/search_vacancy', vacancy_controller.vacancy_search_post);
 
 /* POST request for getting vacancy details */
 router.post('/detail_vacancy', vacancy_controller.vacancy_detail_post);
