@@ -75,7 +75,7 @@ exports.searchAPi = function(dept, pos) {
         let flag = true;
 
         if(!dept || !pos) {
-            output = 'Did you missed something. I didnt got the department or position you looking for vacancy. Can you try again.';
+            output = 'Did you missed something. you must mention either of the parameter: department, jobid, position. Can you try again.';
             reject(responseStruct.create_response(output));
         }
         for(let i in data.vacancylist) {
