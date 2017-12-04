@@ -28,6 +28,8 @@ router.post('/', function(req, res){
         case 'default':
             error_controller.handle_error(req, res);
         break;
+        default: error_controller.handle_error(req, res);
+        break;
     }
 });
 

@@ -8,8 +8,13 @@ router.get('/', function(req, res){
     if(action.length == 0) {
         res.redirect('/error');
     }
-    else {        
-        res.redirect('/vacancy');
+    else {
+        if(action.indexof('salesforce') != -1) {
+            res.redirect('/salesforce');
+        }
+        else if(action.indexof('vacancy') != -1) {            
+            res.redirect('/vacancy');
+        }
     }
 });
 
