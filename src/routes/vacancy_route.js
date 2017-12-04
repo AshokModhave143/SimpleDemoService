@@ -5,6 +5,7 @@ let router = express.Router();
 //Controller module import
 let vacancy_controller = require('./../controller/vacancyController');
 let error_controller = require('./../controller/errorController');
+let sf_controller = require('./../controller/sfController');
 
 //Vacancy Routes
 /* Default response */
@@ -24,6 +25,8 @@ router.post('/', function(req, res){
         case 'search_vacancy': vacancy_controller.vacancy_search(req, res);
         break;
         case 'create_vacancy': vacancy_controller.vacancy_create(req,res);
+        break;
+        case 'salesforce_get_lead_info': sf_controller.get_lead_info(req, res);
         break;
         case 'default':
             error_controller.handle_error(req, res);

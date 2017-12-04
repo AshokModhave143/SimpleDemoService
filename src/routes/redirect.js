@@ -20,7 +20,19 @@ router.get('/', function(req, res){
 
 /* POST - Redirect the request to appropriate function */
 router.post('/', function(req, res){        
-    res.redirect('/vacancy');
+    //res.redirect('/vacancy');
+    let action = req.body.result && req.body.result.action ? req.body.result.action : '';
+    if(action.length == 0) {
+        res.redirect('/error');
+    }
+    else {
+        if(action.indexOf('salesforce') != -1) {
+            res.redirect('/sf');
+        }
+        else if(action.indexof('vacancy') != -1) {            
+            res.redirect('/vacancy');
+        }
+    }
 });
 
 module.exports = router;
