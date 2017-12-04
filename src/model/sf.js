@@ -36,10 +36,10 @@ exports.getLeadInfoApi = function() {
             if(err) {
                 reject(responseStruct.create_response(err));
             }
-            console.log('Total : ' + result.totalSize);
-            console.log('fetched : ' + result.records.length);          
+            //console.log('Total : ' + result.totalSize);
+            //console.log('fetched : ' + result.records.length);          
 
-            console.log(result.records[0]);
+            //console.log(result.records[0]);
             resolve("We found " + result.records.length + ' lead records. ' + JSON.stringify(result.records));
         });
     });
