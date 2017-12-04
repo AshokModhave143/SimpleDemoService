@@ -10,7 +10,7 @@ router.get('/', function(req, res){
     }
     else {
         if(action.indexof('salesforce') != -1) {
-            res.redirect('/salesforce');
+            res.redirect('/sf');
         }
         else if(action.indexof('vacancy') != -1) {            
             res.redirect('/vacancy');
