@@ -182,8 +182,8 @@ let getUserinfo = (userid)=> {
                 reject(output);
             }
             else {
-                output = 'Hi ' + json.first_name;
-                output += 'Welcome to chatbot. How may i help you ?';            
+                output = 'Hi ' + json.first_name + ', ';
+                output += 'Welcome to HR Portal. How may i help you ?';            
                 resolve(output);
             }
         });
