@@ -1,5 +1,6 @@
 // Dependencies
 let responseStruct = require('./response');
+let request = require('request');
 
 //Data respository
 let data = require('./../../dataInput/datafile.json');
