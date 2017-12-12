@@ -6,6 +6,7 @@ let sf = require('node-salesforce');
 let conn = null;
 
 //Initializations
+/*
 let login = function() {
     console.log('login method');
     
@@ -28,6 +29,7 @@ let login = function() {
 if(conn == null) {    
     login();
 }
+*/
 //Function Modules
 exports.getLeadInfoApi = function() {
     //let ln = login();

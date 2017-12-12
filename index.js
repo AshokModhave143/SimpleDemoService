@@ -15,12 +15,12 @@ app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 var defaultredirect = require('./src/routes/redirect');
 var vacancyRoute = require('./src/routes/vacancy_route');
 var errorRoute = require('./src/routes/errorRoute');
-var sfRoute = require('./src/routes/sfRoute');
+//var sfRoute = require('./src/routes/sfRoute');
 
 //Routes
 app.use('/', defaultredirect);
 app.use('/vacancy', vacancyRoute);
-app.use('/sf', sfRoute);
+//app.use('/sf', sfRoute);
 app.use('/error', errorRoute);
 
 // Start server
