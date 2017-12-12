@@ -156,34 +156,37 @@ exports.getFbHookApi = function(req) {
         console.log(req.body.id);
         //responseStruct.create_response(JSON.stringify(req.body.id));
         let user_id = req.body.id;
-        let info = getUserinfo(user_id);
-        resolve(responseStruct.create_response(info));
+        getUserinfo(user_id).then((resp)=>{            
+            resolve(responseStruct.create_response(resp));
+        });
     });
 }
 let getUserinfo = (userid)=> {
-    let page_access_token = '***REMOVED***';
-    let url = 'https://graph.facebook.com/v2.6/' + userid +'?fields=first_name,last_name,profile_pic&access_token=' + page_access_token;
+    return new Promise((resolve, reject)=> {
+        let page_access_token = '***REMOVED***';
+        let url = 'https://graph.facebook.com/v2.6/' + userid +'?fields=first_name,last_name,profile_pic&access_token=' + page_access_token;
+        
+        const options = {
+            url: url,
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Accept-Charset': 'utf-8'
+            }
+        };
     
-    const options = {
-        url: url,
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Accept-Charset': 'utf-8'
-        }
-    };
-
-    request(options, (err, res, body)=> {
-        let json = JSON.parse(body);
-        console.log(json);
-        console.log(JSON.parse(res));
-        console.log(err);
-
-        if(err) {
-            return err;
-        }
-        else {            
-            return body;
-        }
-    });
+        request(options, (err, res, body)=> {
+            let json = JSON.parse(body);
+            console.log(json);
+            console.log(JSON.parse(res));
+            console.log(err);
+    
+            if(err) {
+                reject(err);
+            }
+            else {            
+                resolve(body);
+            }
+        });
+    });    
 };
