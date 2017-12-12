@@ -153,7 +153,8 @@ exports.createApi = function(jobid, dept, vacantPos, pos) {
 //FB hook
 exports.getFbHookApi = function(req) {
     return new Promise((resolve, reject)=> {
-        console.log(req.body);
-        resolve(JSON.stringify(req.body));
+        console.log(req.body.id);
+        //responseStruct.create_response(JSON.stringify(req.body.id));
+        resolve(responseStruct.create_response(req.body.id));
     });
 }
