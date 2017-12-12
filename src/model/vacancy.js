@@ -168,11 +168,7 @@ let getUserinfo = (userid)=> {
         
         const options = {
             url: url,
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Accept-Charset': 'utf-8'
-            }
+            method: 'GET'
         };
     
         request(options, (err, res, body)=> {
