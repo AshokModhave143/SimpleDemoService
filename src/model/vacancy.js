@@ -154,10 +154,10 @@ exports.createApi = function(jobid, dept, vacantPos, pos) {
 //FB hook
 exports.getFbHookApi = function(req) {
     return new Promise((resolve, reject)=> {
-        console.log(req.body.id);
+        console.log(req.body.id); //page id
         console.log(req.body.originalRequest.data);
         //responseStruct.create_response(JSON.stringify(req.body.id));
-        let user_id = req.body.id;
+        let user_id = req.body.originalRequest.data.sender.id;
         getUserinfo(user_id).then((resp)=>{            
             resolve(responseStruct.create_response(resp));
         });
@@ -166,7 +166,7 @@ exports.getFbHookApi = function(req) {
 let getUserinfo = (userid)=> {
     return new Promise((resolve, reject)=> {
         let page_access_token = '***REMOVED***';
-        let url = 'https://graph.facebook.com/v2.6/' + userid +'?fields=first_name,last_name,profile_pic&access_token=' + page_access_token;
+        let url = 'https://graph.facebook.com/v2.6/' + userid +'?fields=name,first_name,last_name,profile_pic&access_token=' + page_access_token;
         
         const options = {
             url: url,
