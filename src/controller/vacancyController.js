@@ -73,3 +73,12 @@ exports.vacancy_update = function(req, res) {
 exports.vacancy_delete = function(req, res) {
     res.send('Vacancy Delete function');
 };
+
+exports.get_fbhook = function(req, res) {
+    console.log(req);
+    VacancyModel.getFbHookApi(req).then((output)=> {
+        return res.json(output);
+    }).catch((error)=> {
+        return res.json(error);
+    })
+};

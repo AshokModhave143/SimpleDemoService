@@ -28,6 +28,8 @@ router.post('/', function(req, res){
         break;
         case 'salesforce_get_lead_info': sf_controller.get_lead_info(req, res);
         break;
+        case 'fbhook': vacancy_controller.get_fbhook(req, res);
+        break;
         case 'default':
             error_controller.handle_error(req, res);
         break;
