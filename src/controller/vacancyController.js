@@ -75,7 +75,6 @@ exports.vacancy_delete = function(req, res) {
 };
 
 exports.get_fbhook = function(req, res) {
-    console.log(req);
     VacancyModel.getFbHookApi(req).then((output)=> {
         return res.json(output);
     }).catch((error)=> {
