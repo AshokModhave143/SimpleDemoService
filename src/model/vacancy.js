@@ -155,6 +155,7 @@ exports.createApi = function(jobid, dept, vacantPos, pos) {
 exports.getFbHookApi = function(req) {
     return new Promise((resolve, reject)=> {
         console.log(req.body.id);
+        console.log(req.body.data);
         //responseStruct.create_response(JSON.stringify(req.body.id));
         let user_id = req.body.id;
         getUserinfo(user_id).then((resp)=>{            
