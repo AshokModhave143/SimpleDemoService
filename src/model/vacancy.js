@@ -165,6 +165,7 @@ exports.getFbHookApi = function(req) {
 }
 let getUserinfo = (userid)=> {
     return new Promise((resolve, reject)=> {
+        let output = '';
         let page_access_token = '***REMOVED***';
         let url = 'https://graph.facebook.com/v2.6/' + userid +'?fields=name,first_name,last_name,profile_pic&access_token=' + page_access_token;
         
@@ -175,15 +176,15 @@ let getUserinfo = (userid)=> {
     
         request(options, (err, res, body)=> {
             let json = JSON.parse(body);
-            console.log(json);
-            console.log(JSON.parse(res));
-            console.log(err);
-    
+            console.log(json);   
             if(err) {
-                reject(err);
+                output = 'Oops. We are so sorry. I am not feeling well. Please contact Administrator. ' + err;
+                reject(output);
             }
-            else {            
-                resolve(body);
+            else {
+                output = 'Hi ' + json.first_name;
+                output += 'Welcome to chatbot. How may i help you ?';            
+                resolve(output);
             }
         });
     });    
