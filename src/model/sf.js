@@ -1,6 +1,6 @@
 // Dependencies
-let responseStruct = require('./response');
-let sf = require('node-salesforce');
+let responseStruct = require("./response");
+let sf = require("node-salesforce");
 
 //Declarations
 let conn = null;
@@ -13,7 +13,7 @@ let login = function() {
     conn = new sf.Connection({
         loginUrl: 'https://test.salesforce.com/'
     });
-    conn.login('***REMOVED***', '***REMOVED***', function(err, userInfo) {
+    conn.login(getConfig().USERNAME, getConfig().PASSWORD, function(err, userInfo) {
         if(err) {
             return console.log(err);
         }
@@ -31,29 +31,39 @@ if(conn == null) {
 }
 */
 //Function Modules
-exports.getLeadInfoApi = function() {
-    //let ln = login();
-    return new Promise((resolve, reject)=> {
-        conn.query('SELECT Id, Name FROM Account', function(err, result){
-            if(err) {
-                reject(responseStruct.create_response(err));
-            }
-            //console.log('Total : ' + result.totalSize);
-            //console.log('fetched : ' + result.records.length);
-            //console.log(result.records[0]);
+exports.getLeadInfoApi = function () {
+  //let ln = login();
+  return new Promise((resolve, reject) => {
+    conn.query("SELECT Id, Name FROM Account", function (err, result) {
+      if (err) {
+        reject(responseStruct.create_response(err));
+      }
+      //console.log('Total : ' + result.totalSize);
+      //console.log('fetched : ' + result.records.length);
+      //console.log(result.records[0]);
 
-            let output = 'Great. We got Lead records for you. There are - '
-                        + ' Total : ' + result.totalSize + ' | Total Fetched : ' + result.records.length 
-                        + ' Detail records as below -'
-                        + ' ---------------------------------------------------------';
-            for(var i in result.records) {                
-                let str = 'Id : ' + result.records[i].Id + ' | Name : ' + result.records[i].Name + ' | Url : ' + result.records[i].attributes.url + ' ## ';
-                output += str ;
+      let output =
+        "Great. We got Lead records for you. There are - " +
+        " Total : " +
+        result.totalSize +
+        " | Total Fetched : " +
+        result.records.length +
+        " Detail records as below -" +
+        " ---------------------------------------------------------";
+      for (var i in result.records) {
+        let str =
+          "Id : " +
+          result.records[i].Id +
+          " | Name : " +
+          result.records[i].Name +
+          " | Url : " +
+          result.records[i].attributes.url +
+          " ## ";
+        output += str;
 
-                //console.log(i + ' : ' + str);
-            }
-            if(i == (result.records.length-1))
-                resolve(output);
-        });
+        //console.log(i + ' : ' + str);
+      }
+      if (i == result.records.length - 1) resolve(output);
     });
+  });
 };
